@@ -1,0 +1,20 @@
+commit 077a7d4e1dffea9d42b8e6cd8231f061358823e3
+Author: kukaan <58886775+kukaan@users.noreply.github.com>
+Date:   Wed Oct 28 14:29:31 2020 +0200
+
+    delete and rename
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 4d17f6e11007d29d4898f247069a071107b59e1b
+Author: kukaan <58886775+kukaan@users.noreply.github.com>
+Date:   Wed Oct 28 14:23:25 2020 +0200
+
+    add files
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
