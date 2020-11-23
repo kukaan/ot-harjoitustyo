@@ -33,14 +33,13 @@ public class LottokoneUI {
             if (!commands.containsKey(input)) {
                 System.out.println("unknown command");
                 printHelp();
+                continue;
             }
             
             if (input.equals("quit")) {
                 break;
             } else if (input.equals("draw")) {
                 draw();
-            } else if (input.equals("")) {
-                
             }
         }
     }
