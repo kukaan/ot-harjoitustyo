@@ -11,7 +11,8 @@
 ## Suunnitellut toiminnallisuudet
 
 Käyttäjä voi komentoriviltä
-- luoda käyttäjätunnuksen ja kirjautua sillä
+- arpoa yksittäisen lottorivin [tehty]
+- luoda käyttäjätunnuksen ja kirjautua sillä [tehty]
 - valita pelin asetukset: arvottavan rivin pituus ja valittavissa olevien lukujen määrä
 - syöttää ja tallentaa lottorivejä
 - pelata valitsemillaan lottoriveillä
