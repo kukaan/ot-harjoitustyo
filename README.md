@@ -4,7 +4,9 @@ Sovelluksella voidaan pelata lottopeliä.
 
 ## Dokumentaatio
 
-[Vaatimusmäärittely](https://github.com/kukaan/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+[Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
 
-[Työaikakirjanpito](https://github.com/kukaan/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+[Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
+
+[Työaikakirjanpito](dokumentaatio/tyoaikakirjanpito.md)
 
