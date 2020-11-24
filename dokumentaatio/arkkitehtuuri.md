@@ -1,1 +1,1 @@
-![UML](dokumentaatio/luokkakaavio.png)
+![UML](luokkakaavio.png)
