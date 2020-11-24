@@ -2,16 +2,20 @@ package lottokone.domain;
 
 import java.util.Arrays;
 import java.util.Random;
+import lottokone.dao.UserDao;
 
 public class LottokoneService {
     
-    Random random;
+    private Random random;
+    private UserDao userDao;
+    private User loggedUser;
     
-    int drawSize; // how many numbers will be chosen/drawn
-    int amountOfChoosableNumbers; // how many numbers there are to choose/draw from
+    private int drawSize; // how many numbers will be chosen/drawn
+    private int amountOfChoosableNumbers; // how many numbers there are to choose/draw from
 
-    public LottokoneService(Random random) {
+    public LottokoneService(Random random, UserDao userDao) {
         this.random = random;
+        this.userDao = userDao;
         
         drawSize = 7;
         amountOfChoosableNumbers = 40;
@@ -33,4 +37,21 @@ public class LottokoneService {
         return allDrawn;
     }
     
+    public boolean create(String username) {
+        User u = userDao.create(new User(username));
+        return u != null;
+    }
+    
+    public boolean login(String username) {
+        loggedUser = userDao.findByName(username);
+        return loggedUser != null;
+    }
+    
+    public void logout() {
+        loggedUser = null;
+    }
+    
+    public User getLoggedUser() {
+        return loggedUser;
+    }
 }

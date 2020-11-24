@@ -1,6 +1,8 @@
 package lottokone.domain;
 
 import java.util.Random;
+import lottokone.dao.TemporaryUserDao;
+import lottokone.dao.UserDao;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -10,6 +12,7 @@ public class LottokoneServiceTest {
     Random random;
     Random floor;
     Random ceiling;
+    UserDao userDao;
     LottokoneService floorService;
     LottokoneService ceilingService;
     LottokoneService randomService;
@@ -39,9 +42,12 @@ public class LottokoneServiceTest {
         floor = new FloorRandom();
         ceiling = new CeilingRandom();
         random = new Random();
-        floorService = new LottokoneService(floor);
-        ceilingService = new LottokoneService(ceiling);
-        randomService = new LottokoneService(random);
+        userDao = new TemporaryUserDao();
+        floorService = new LottokoneService(floor, userDao);
+        ceilingService = new LottokoneService(ceiling, userDao);
+        randomService = new LottokoneService(random, userDao);
+        
+        userDao.create(new User("asdf"));
     }
 
     @Test
@@ -80,5 +86,38 @@ public class LottokoneServiceTest {
                 assertTrue(drawn[i] > 0 && drawn[i] < 41);
             }
         }
+    }
+    
+    @Test
+    public void createReturnsTrueIfDaoReturnsUser() {
+        assertTrue(randomService.create("baba"));
+    }
+    
+    @Test
+    public void createReturnsFalseIfDaoReturnsNull() {
+        assertFalse(randomService.create("asdf"));
+    }
+    
+    @Test
+    public void loginReturnsTrueIfDaoReturnsUser() {
+        assertTrue(randomService.login("asdf"));
+    }
+    
+    @Test
+    public void loginReturnsFalseIfDaoReturnsNull() {
+        assertFalse(randomService.login("baba"));
+    }
+    
+    @Test
+    public void getLoggedUserReturnsLoggedUser() {
+        randomService.login("asdf");
+        assertThat(randomService.getLoggedUser().getName(), is(equalTo("asdf")));
+    }
+    
+    @Test
+    public void logoutMakesLoggedUserNull() {
+        randomService.login("asdf");
+        randomService.logout();
+        assertThat(randomService.getLoggedUser(), is(equalTo(null)));
     }
 }

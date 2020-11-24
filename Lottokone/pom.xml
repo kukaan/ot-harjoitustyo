@@ -27,6 +27,7 @@
                 <configuration>
                     <excludes>
                         <exclude>lottokone/ui/*</exclude>
+                        <exclude>lottokone/Main*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
