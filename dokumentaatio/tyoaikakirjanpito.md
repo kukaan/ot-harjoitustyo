@@ -7,3 +7,4 @@
 | 13.11. | 2    | testaamisen tutkimista ja toteuttamista |
 | 21.11. | 1    | luokkarakenteen suunnittelua ja piirtelyä |
 | 24.11. | 2    | käyttäjän luomisen ja kirjautumisen toteutus sekä yksikkötestejä |
+| yht   | 7   | | 
