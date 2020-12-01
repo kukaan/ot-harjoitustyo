@@ -11,23 +11,33 @@ public class LottokoneService {
     private User loggedUser;
     
     private int drawSize; // how many numbers will be chosen/drawn
-    private int amountOfChoosableNumbers; // how many numbers there are to choose/draw from
+    private int rangeSize; // how many numbers there are to choose/draw from
 
     public LottokoneService(Random random, UserDao userDao) {
         this.random = random;
         this.userDao = userDao;
         
         drawSize = 7;
-        amountOfChoosableNumbers = 40;
+        rangeSize = 40;
     }
 
+    public int getDrawSize() {
+        return drawSize;
+    }
+
+    public int getRange() {
+        return rangeSize;
+    }
+    
+    
+
     public int[] draw() {
-        boolean[] removed = new boolean[amountOfChoosableNumbers];
+        boolean[] removed = new boolean[rangeSize];
         int[] allDrawn = new int[drawSize];
         for (int i = 0; i < drawSize; i++) {
-            int oneDrawn = random.nextInt(amountOfChoosableNumbers);
+            int oneDrawn = random.nextInt(rangeSize);
             while (removed[oneDrawn]) {
-                oneDrawn = random.nextInt(amountOfChoosableNumbers);
+                oneDrawn = random.nextInt(rangeSize);
 //                System.out.println(oneDrawn);
             }
             removed[oneDrawn] = true;
@@ -53,5 +63,47 @@ public class LottokoneService {
     
     public User getLoggedUser() {
         return loggedUser;
+    }
+
+    public boolean add(String input) {
+        
+        // process and validate the input
+        int[] numbersToAdd = new int[drawSize];
+        String[] s = input.split(",");
+        if (s.length != drawSize) return false;
+        for (int i = 0; i < drawSize; i++) {
+            int number = -1;
+            try {
+                number = Integer.valueOf(s[i]);
+            } catch (Exception e) {
+                return false;
+            }
+            if (number < 1 || number > rangeSize) return false;
+            numbersToAdd[i] = number;
+        }
+        Arrays.sort(numbersToAdd);
+        for (int i = 0; i < drawSize; i++) {
+            for (int j = 0; j < drawSize; j++) {
+                if (i == j) continue;
+                if (numbersToAdd[i] == numbersToAdd[j]) return false;
+            }
+        }
+        
+        if (accountHasNumbers(numbersToAdd)) return false;
+        
+        loggedUser.addNumbers(numbersToAdd);
+        return true;
+    }
+    
+    private boolean accountHasNumbers(int[] numbers) {
+        for (int[] accountNumbers : loggedUser.getNumbersList()) {
+            for (int i = 0; i < drawSize; i++) {
+                if (accountNumbers[i] !=  numbers[i]) {
+                    break;
+                }
+                return true;
+            }
+        }
+        return false;
     }
 }
