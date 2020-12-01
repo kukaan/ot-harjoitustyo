@@ -66,42 +66,69 @@ public class LottokoneService {
     }
 
     public boolean add(String input) {
-        
-        // process and validate the input
-        int[] numbersToAdd = new int[drawSize];
+        int[] numbersToAdd;
+        try {
+            numbersToAdd = stringToValidArrayOfNumbers(input);
+        } catch (Exception e) {
+            return false;
+        }
+        Arrays.sort(numbersToAdd);
+        if (numbersHaveDuplicates(numbersToAdd)) {
+            return false;
+        }
+        if (accountHasNumbers(numbersToAdd)) { 
+            return false;
+        }
+        loggedUser.addNumbers(numbersToAdd);
+        return true;
+    }
+    
+    private int[] stringToValidArrayOfNumbers(String input) throws Exception {
+        int[] array = new int[drawSize];
         String[] s = input.split(",");
-        if (s.length != drawSize) return false;
+        if (s.length != drawSize) { 
+            throw new Exception();
+        }
         for (int i = 0; i < drawSize; i++) {
             int number = -1;
             try {
                 number = Integer.valueOf(s[i]);
-            } catch (Exception e) {
-                return false;
+            } catch (NumberFormatException e) {
+                throw e;
             }
-            if (number < 1 || number > rangeSize) return false;
-            numbersToAdd[i] = number;
+            if (number < 1 || number > rangeSize) { 
+                throw new Exception();
+            }
+            array[i] = number;
         }
-        Arrays.sort(numbersToAdd);
+        return array;
+    }
+    
+    private boolean numbersHaveDuplicates(int[] numbersToAdd) {
         for (int i = 0; i < drawSize; i++) {
             for (int j = 0; j < drawSize; j++) {
-                if (i == j) continue;
-                if (numbersToAdd[i] == numbersToAdd[j]) return false;
+                if (i == j) {
+                    continue;
+                }
+                if (numbersToAdd[i] == numbersToAdd[j]) { 
+                    return true;
+                }
             }
         }
-        
-        if (accountHasNumbers(numbersToAdd)) return false;
-        
-        loggedUser.addNumbers(numbersToAdd);
-        return true;
+        return false;
     }
     
     private boolean accountHasNumbers(int[] numbers) {
         for (int[] accountNumbers : loggedUser.getNumbersList()) {
             for (int i = 0; i < drawSize; i++) {
+//                System.out.println("acc: "+accountNumbers[i]+", new:"+numbers[i]);
                 if (accountNumbers[i] !=  numbers[i]) {
                     break;
                 }
-                return true;
+                if (i == drawSize - 1) {
+//                    System.out.println("accountHasNumbers");
+                    return true;
+                }
             }
         }
         return false;
