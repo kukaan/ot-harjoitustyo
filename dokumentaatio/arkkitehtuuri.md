@@ -1,1 +1,2 @@
-![UML](luokkakaavio.png)
+![luokkakaavio](luokkakaavio.png)
+![sekvenssikaavio](sekvenssikaavio.png)
