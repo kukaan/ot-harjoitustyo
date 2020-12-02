@@ -8,4 +8,5 @@
 | 21.11. | 1    | luokkarakenteen suunnittelua ja piirtelyä |
 | 24.11. | 2    | käyttäjän luomisen ja kirjautumisen toteutus sekä yksikkötestejä |
 | 1.12. | 4    | lottorivien tallennus |
-| yht   | 11   | | 
+| 2.12. | 1    | sekvenssikaavio ja release |
+| yht   | 12   | | 
