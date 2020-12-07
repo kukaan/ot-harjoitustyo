@@ -128,7 +128,7 @@ public class LottokoneServiceTest {
         randomService.login("asdf");
         randomService.add("40,1,2,3,4,5,6");
         int[] expected = {1,2,3,4,5,6,40};
-        List<int[]> numbersList = randomService.getLoggedUser().getNumbersList();
+        List<Numbers> numbersList = randomService.getLoggedUser().getNumbersList();
         assertThat(numbersList.get(0), is(equalTo(expected)));
     }
     
@@ -139,8 +139,9 @@ public class LottokoneServiceTest {
         int[] expected0 = {1,2,3,4,5,6,39};
         randomService.add("40,1,2,3,4,5,6");
         int[] expected1 = {1,2,3,4,5,6,40};
-        List<int[]> numbersList = randomService.getLoggedUser().getNumbersList();
-//        System.out.println(Arrays.toString(numbersList.get(0)));
+        List<Numbers> numbersList = randomService.getLoggedUser().getNumbersList();
+//        System.out.println(Arrays.toString(expected0));
+//        System.out.println(numbersList.get(0));
         assertThat(numbersList.get(0), is(equalTo(expected0)));
         assertThat(numbersList.get(1), is(equalTo(expected1)));
     }
@@ -150,5 +151,19 @@ public class LottokoneServiceTest {
         randomService.login("asdf");
         randomService.add("40,1,2,3,4,5,6");
         assertFalse(randomService.add("6,40,1,2,3,4,5"));
+    }
+    
+    @Test
+    public void numbersOutOfRangeCannotBeAdded() {
+        randomService.login("asdf");
+        assertFalse(randomService.add((1 + randomService.getRange()) + ",1,2,3,4,5"));
+        assertFalse(randomService.add("0,1,2,3,4,5"));
+    }
+    
+    @Test
+    public void wrongAmountOfNumbersCannotBeAdded() {
+        randomService.login("asdf");
+        assertFalse(randomService.add("1,2,3,4,5,6,7,8"));
+        assertFalse(randomService.add("1,2,3,4,5,6"));
     }
 }

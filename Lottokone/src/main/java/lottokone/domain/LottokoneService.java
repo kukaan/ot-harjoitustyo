@@ -79,7 +79,7 @@ public class LottokoneService {
         if (accountHasNumbers(numbersToAdd)) { 
             return false;
         }
-        loggedUser.addNumbers(numbersToAdd);
+        loggedUser.addNumbers(new Numbers(numbersToAdd));
         return true;
     }
     
@@ -119,10 +119,10 @@ public class LottokoneService {
     }
     
     private boolean accountHasNumbers(int[] numbers) {
-        for (int[] accountNumbers : loggedUser.getNumbersList()) {
+        for (Numbers accountNumbers : loggedUser.getNumbersList()) {
             for (int i = 0; i < drawSize; i++) {
 //                System.out.println("acc: "+accountNumbers[i]+", new:"+numbers[i]);
-                if (accountNumbers[i] !=  numbers[i]) {
+                if (accountNumbers.getNumbers()[i] !=  numbers[i]) {
                     break;
                 }
                 if (i == drawSize - 1) {
