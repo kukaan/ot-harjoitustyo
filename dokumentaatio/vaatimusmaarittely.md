@@ -15,8 +15,8 @@ Käyttäjä voi komentoriviltä
 - luoda käyttäjätunnuksen ja kirjautua sillä [tehty]
 - valita pelin asetukset: arvottavan rivin pituus ja valittavissa olevien lukujen määrä
 - syöttää ja tallentaa lottorivejä [tehty]
-- pelata valitsemillaan lottoriveillä
-- nähdä pelin tuloksen
+- pelata valitsemillaan lottoriveillä [tehty]
+- nähdä pelin tuloksen [tehty]
 - katsoa koosteen omista pelituloksistaan, käyttämästään rahasummasta ja voittamastaan rahasummasta
 
 ## Jatkokehitysideoita
