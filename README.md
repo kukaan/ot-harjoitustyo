@@ -10,6 +10,12 @@ Sovelluksella voidaan pelata lottopeliä.
 
 [Työaikakirjanpito](dokumentaatio/tyoaikakirjanpito.md)
 
+## Julkaisut
+
+[Viikko 6](https://github.com/kukaan/ot-harjoitustyo/releases/tag/viikko6)
+
+[Viikko 5](https://github.com/kukaan/ot-harjoitustyo/releases/tag/viikko5)
+
 ## Komentorivitoiminnot
 
 ### Testaus
