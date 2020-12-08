@@ -43,7 +43,11 @@ public class User {
     public double getWinningsSum() {
         return winningsSum;
     }
-
+    
+    /**
+     * Add amount of money won to the user
+     * @param winnings amount of money won
+     */
     public void addWin(double winnings) {
         this.winningsSum += winnings;
     }
@@ -52,6 +56,10 @@ public class User {
         return lossesSum;
     }
     
+    /**
+     * Add amount of money lost to user
+     * @param losses amount of money lost
+     */
     public void addLoss(double losses) {
         this.lossesSum += losses;
     }
