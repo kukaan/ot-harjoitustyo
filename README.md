@@ -4,11 +4,19 @@ Sovelluksella voidaan pelata lottopeliä.
 
 ## Dokumentaatio
 
-[Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
+[Käyttöohje](dokumentaatio/kayttoohje.md)
+
+[Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
 
 [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
 
 [Työaikakirjanpito](dokumentaatio/tyoaikakirjanpito.md)
+
+## Julkaisut
+
+[Viikko 6](https://github.com/kukaan/ot-harjoitustyo/releases/tag/viikko6)
+
+[Viikko 5](https://github.com/kukaan/ot-harjoitustyo/releases/tag/viikko5)
 
 ## Komentorivitoiminnot
 

@@ -9,4 +9,6 @@
 | 24.11. | 2    | käyttäjän luomisen ja kirjautumisen toteutus sekä yksikkötestejä |
 | 1.12. | 4    | lottorivien tallennus |
 | 2.12. | 1    | sekvenssikaavio ja release |
-| yht   | 12   | | 
+| 7.12. | 1    | refaktorointia |
+| 8.12. | 6    | pelaamistoiminnallisuus testeineen, javadoc, arkkitehtuurikuvaus ja käyttöohje |
+| yht   | 19   | | 
