@@ -2,10 +2,12 @@
 package lottokone.ui;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 import lottokone.domain.LottokoneService;
+import lottokone.domain.Numbers;
 
 public class LottokoneUI {
     private Scanner reader;
@@ -36,6 +38,7 @@ public class LottokoneUI {
         
         loggedInCommands.put("logout", "log out from your account");
         loggedInCommands.put("add", "pick and save numbers to your account");
+        loggedInCommands.put("play", "play a round of lotto");
     }
     
     public void start() {
@@ -65,7 +68,9 @@ public class LottokoneUI {
                 logout();
             } else if (input.equals("add")) {
                 add();
-            }
+            } else if (input.equals("play")) {
+                play();
+            } 
             
         }
     }
@@ -160,4 +165,49 @@ public class LottokoneUI {
             System.out.println(numbers);});
         printAvailableCommands();
     }
+    
+    private void play() {
+        System.out.println("[0]\t[all of the below]");
+        printEnumeratedList(service.getLoggedUser().getNumbersList());
+        System.out.println("Choose the saved numbers you want to play "
+                + "separated by commas (,):");
+        String ticketsInput = reader.nextLine();
+        
+        List<Numbers> selectedTickets = service.selectTickets(ticketsInput);
+        if (selectedTickets == null) {
+            System.out.println("Invalid input!");
+            return;
+        }
+        
+        int costs = service.buyTickets(selectedTickets.size());
+        Numbers drawn = new Numbers(service.draw());
+        
+        System.out.println("The results have come in.");
+        // todo: add dramatic effect by printing numbers one at a time with delay
+        System.out.println("The winning numbers are " + drawn);
+        
+        List<Integer> hitsOnTickets = service.play(drawn, selectedTickets);
+        List<Integer> winnings = service.countWinnings(hitsOnTickets);
+        
+        for (int i = 0; i < selectedTickets.size(); i++) {
+            System.out.println(selectedTickets.get(i) + ": " + 
+                    hitsOnTickets.get(i) + " matching numbers wins you " + 
+                    (double) winnings.get(i) / 100 + "€");
+        }
+        
+        int winSum = service.addWinnings(winnings);
+        System.out.println("You won " + (double) winSum / 100 + 
+                "€ and lost " + (double) costs / 100 + "€");
+        System.out.println("In total, you have won " + 
+                (double) service.getLoggedUser().getWinningsSum() / 100 + "€ and lost " + 
+                (double) service.getLoggedUser().getLossesSum() / 100 + "€");
+    }
+    
+    private void printEnumeratedList(List list) {
+        int i = 1;
+        for (Object o : list) {
+            System.out.println("[" + i++ + "]\t" + o);
+        }
+    }
+    
 }
