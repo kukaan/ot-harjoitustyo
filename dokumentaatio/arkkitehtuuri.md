@@ -13,6 +13,7 @@ Tässä sekvenssikaaviossa DAO-pakkaus ei esiinny, sillä LottokoneService on ki
 
 
 ## Sovelluslogiikka
-Sovelluslogiikka järjestetään LottokoneService-luokassa, joka tarjoaa toimintoja käyttöliittymälle, ja käsittelee DAO:n kautta haetun User-olion tietoja.
 
+Sovelluksen tietomalli käsittää luokat User ja Numbers, jotka kuvaavat käyttäjiä ja näille tallennettuja lottorivejä. Käyttäjäolioon tallennetaan myös tiedot kertyneistä voitoista ja tappioista.
 
+Sovelluslogiikka järjestetään LottokoneService-luokassa, joka tarjoaa toimintoja käyttöliittymälle, ja käsittelee DAO:n kautta haetun User-olion tietoja. Kokonaisien toimintometodien lisäksi luokkaan sisältyy useita pienempiä metodeja, jotka hoitavat osia suuremmista toiminnoista.
