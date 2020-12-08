@@ -10,5 +10,5 @@
 | 1.12. | 4    | lottorivien tallennus |
 | 2.12. | 1    | sekvenssikaavio ja release |
 | 7.12. | 1    | refaktorointia |
-| 8.12. | 7    | pelaamistoiminnallisuus testeineen, javadoc, arkkitehtuurikuvaus ja käyttöohje |
-| yht   | 20   | | 
+| 8.12. | 8    | pelaamistoiminnallisuus testeineen, javadoc, arkkitehtuurikuvaus ja käyttöohje |
+| yht   | 21   | | 
