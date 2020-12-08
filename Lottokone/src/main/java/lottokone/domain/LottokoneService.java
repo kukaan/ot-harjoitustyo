@@ -39,7 +39,10 @@ public class LottokoneService {
     }
     
     
-
+    /**
+     * Generates random numbers based on the current settings.
+     * @return valid random numbers
+     */
     public int[] draw() {
         boolean[] removed = new boolean[rangeSize];
         int[] allDrawn = new int[drawSize];
@@ -56,16 +59,29 @@ public class LottokoneService {
         return allDrawn;
     }
     
+    /**
+     * Creates a new user account.
+     * @param username  user input
+     * @return operationSuccessful
+     */
     public boolean create(String username) {
         User u = userDao.create(new User(username));
         return u != null;
     }
     
+    /**
+     * Signs into an existing user account.
+     * @param username  user input
+     * @return operationSuccessful
+     */
     public boolean login(String username) {
         loggedUser = userDao.findByName(username);
         return loggedUser != null;
     }
     
+    /**
+     * Signs out of the currently logged in user account.
+     */
     public void logout() {
         loggedUser = null;
     }
@@ -74,10 +90,15 @@ public class LottokoneService {
         return loggedUser;
     }
 
+    /**
+     * Adds and saves numbers/ticket to user through multiple steps of validation.
+     * @param input user input
+     * @return operationSuccessful
+     */
     public boolean add(String input) {
         List<Integer> numbersToAdd;
         try {
-            numbersToAdd = stringToValidListOfNumbers(input, rangeSize, drawSize, drawSize);
+            numbersToAdd = stringToListOfNumbers(input, rangeSize, drawSize, drawSize);
         } catch (Exception e) {
             return false;
         }
@@ -85,14 +106,24 @@ public class LottokoneService {
         if (numbersHaveDuplicates(numbersToAdd)) {
             return false;
         }
-        if (accountHasNumbers(numbersToAdd)) { 
+        if (accountHasSameNumbers(numbersToAdd)) { 
             return false;
         }
         loggedUser.addNumbers(new Numbers(numbersToAdd));
         return true;
     }
     
-    private List<Integer> stringToValidListOfNumbers(String input, int roof, int minAmount, int maxAmount) throws Exception {
+    /**
+     * Transforms user input into a list of numbers which are valid in amount 
+     * and range.
+     * @param input user input
+     * @param maxValue  maximum value of any given number
+     * @param minAmount minimum amount of numbers
+     * @param maxAmount maximum amount of numbers
+     * @return  a valid list of numbers
+     * @throws Exception 
+     */
+    private List<Integer> stringToListOfNumbers(String input, int maxValue, int minAmount, int maxAmount) throws Exception {
         List<Integer> list = new ArrayList<>(minAmount);
         String[] s = input.split(",");
         if (s.length < minAmount || s.length > maxAmount) {
@@ -105,7 +136,7 @@ public class LottokoneService {
             } catch (NumberFormatException e) {
                 throw e;
             }
-            if (number < 1 || number > rangeSize) { 
+            if (number < 1 || number > maxValue) { 
                 throw new Exception();
             }
             list.add(number);
@@ -113,13 +144,18 @@ public class LottokoneService {
         return list;
     }
     
-    private boolean numbersHaveDuplicates(List<Integer> numbersToAdd) {
+    /**
+     * Checks for duplicates in numbers.
+     * @param numbers
+     * @return hasDuplicates
+     */
+    private boolean numbersHaveDuplicates(List<Integer> nums) {
         for (int i = 0; i < drawSize; i++) {
             for (int j = 0; j < drawSize; j++) {
                 if (i == j) {
                     continue;
                 }
-                if (numbersToAdd.get(i).equals(numbersToAdd.get(j))) { 
+                if (nums.get(i).equals(nums.get(j))) { 
                     return true;
                 }
             }
@@ -127,7 +163,12 @@ public class LottokoneService {
         return false;
     }
     
-    private boolean accountHasNumbers(List<Integer> numbers) {
+    /**
+     * Checks if the currently logged in user has already saved the given numbers.
+     * @param numbers
+     * @return hasSameNumbers
+     */
+    private boolean accountHasSameNumbers(List<Integer> numbers) {
         for (Numbers accountNumbers : loggedUser.getNumbersList()) {
             for (int i = 0; i < drawSize; i++) {
 //                System.out.println("acc: "+accountNumbers[i]+", new:"+numbers[i]);
@@ -151,6 +192,12 @@ public class LottokoneService {
         this.ticketPrice = ticketPrice;
     }
     
+    /**
+     * Select specific saved numbers/tickets by id input separated by commas 
+     * or select all numbers/tickets by input 0.
+     * @param ticketIdsInput
+     * @return list of tickets
+     */
     public List<Numbers> selectTickets(String ticketIdsInput) {
         List<Numbers> numbersList = loggedUser.getNumbersList();
         if (ticketIdsInput.equals("0")) {
@@ -158,7 +205,7 @@ public class LottokoneService {
         }
         List<Integer> ticketIds;
         try {
-            ticketIds = stringToValidListOfNumbers(ticketIdsInput, 
+            ticketIds = stringToListOfNumbers(ticketIdsInput, 
                     numbersList.size(), 1, numbersList.size());
         } catch (Exception e) {
             return null;
@@ -171,19 +218,26 @@ public class LottokoneService {
         return selectedTickets;
     }
     
-    public List<Integer> play(Numbers drawn, List<Numbers> selectedTickets) {
+    /**
+     * Counts the amount of matching numbers on each ticket in the given list.
+     * @param drawn the winning numbers
+     * @param selectedTickets   the played numbers
+     * @return amount of hits on each ticket played
+     */
+    public List<Integer> countHitsOnTickets(Numbers drawn, List<Numbers> selectedTickets) {
         List<Integer> hitsOnTickets = new ArrayList<>(selectedTickets.size());
         for (Numbers ticket : selectedTickets) {
             hitsOnTickets.add(countTicketHits(drawn, ticket));
         }
         return hitsOnTickets;
     }
-
-    // todo: fix this:
-    // The winning numbers are [3, 7, 13, 17, 19, 28, 39]
-    // [1, 2, 3, 4, 5, 6, 7]: 0 matches wins you 0.0€
-    // The winning numbers are [2, 10, 14, 18, 36, 37, 40]
-    // [21, 22, 23, 24, 25, 26, 27]: 5 matches wins you 50.0€
+    
+    /**
+     * Counts the amount of matching numbers in a single ticket.
+     * @param drawn
+     * @param ticket
+     * @return amount of hits on this ticket
+     */
     private int countTicketHits(Numbers drawn, Numbers ticket) {
         int hits = 0;
         for (int i = 0; i < drawn.getNumbers().size(); i++) {
@@ -194,13 +248,24 @@ public class LottokoneService {
         return hits;
     }
     
+    /**
+     * Calculates the total cost of given amount of tickets 
+     * and adds them to the user.
+     * @param tickets
+     * @return sum of costs
+     */
     public int buyTickets(int tickets) {
         int costs = tickets * ticketPrice;
         loggedUser.addLoss(costs);
         return costs;
     }
 
-    public List<Integer> countWinnings(List<Integer> hitsOnTickets) {
+    /**
+     * Calculates the winnings on each ticket based on the amount of hits on each.
+     * @param hitsOnTickets amount of hits on each ticket
+     * @return winnings on each ticket
+     */
+    public List<Integer> calculateWinnings(List<Integer> hitsOnTickets) {
         List<Integer> winningsPerTicket = new ArrayList<>();
         for (int i = 0; i < hitsOnTickets.size(); i++) {
             int hits = hitsOnTickets.get(i);
@@ -209,6 +274,11 @@ public class LottokoneService {
         return winningsPerTicket;
     }
 
+    /**
+     * Sums the given winnings and adds them to the user.
+     * @param winnings
+     * @return sum of winnings
+     */
     public int addWinnings(List<Integer> winnings) {
         int winSum = winnings.stream().mapToInt(win -> win).sum();
         loggedUser.addWin(winSum);

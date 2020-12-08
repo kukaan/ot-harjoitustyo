@@ -186,8 +186,8 @@ public class LottokoneUI {
         // todo: add dramatic effect by printing numbers one at a time with delay
         System.out.println("The winning numbers are " + drawn);
         
-        List<Integer> hitsOnTickets = service.play(drawn, selectedTickets);
-        List<Integer> winnings = service.countWinnings(hitsOnTickets);
+        List<Integer> hitsOnTickets = service.countHitsOnTickets(drawn, selectedTickets);
+        List<Integer> winnings = service.calculateWinnings(hitsOnTickets);
         
         for (int i = 0; i < selectedTickets.size(); i++) {
             System.out.println(selectedTickets.get(i) + ": " + 
