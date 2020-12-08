@@ -95,15 +95,15 @@ public class LottokoneService {
     private List<Integer> stringToValidListOfNumbers(String input, int roof, int minAmount, int maxAmount) throws Exception {
         List<Integer> list = new ArrayList<>(minAmount);
         String[] s = input.split(",");
-        if (s.length < minAmount || s.length > maxAmount) { 
+        if (s.length < minAmount || s.length > maxAmount) {
             throw new Exception();
         }
-        for (int i = 0; i < maxAmount; i++) {
+        for (int i = 0; i < s.length; i++) {
             int number = -1;
             try {
                 number = Integer.valueOf(s[i]);
             } catch (NumberFormatException e) {
-                throw e; // todo: is this ok?
+                throw e;
             }
             if (number < 1 || number > rangeSize) { 
                 throw new Exception();
@@ -166,7 +166,7 @@ public class LottokoneService {
         
         List<Numbers> selectedTickets = new ArrayList<>();
         for (Integer id : ticketIds) {
-            selectedTickets.add(numbersList.get(id-1));
+            selectedTickets.add(numbersList.get(id - 1));
         }
         return selectedTickets;
     }
