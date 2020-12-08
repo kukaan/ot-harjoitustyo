@@ -4,7 +4,9 @@ Sovelluksella voidaan pelata lottopeliä.
 
 ## Dokumentaatio
 
-[Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
+[Käyttöohje](dokumentaatio/kayttoohje.md)
+
+[Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
 
 [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
 
