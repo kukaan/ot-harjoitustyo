@@ -5,13 +5,13 @@ import java.util.List;
 
 public class User {
     private final String name;
-    private List<int[]> numbersList;
+    private List<Numbers> numbersList;
     
     public User(String name) {
         this(name, new ArrayList<>());
     }
     
-    public User(String name, List<int[]> numbersList) {
+    public User(String name, List<Numbers> numbersList) {
         this.name = name;
         this.numbersList = numbersList;
     }
@@ -20,15 +20,15 @@ public class User {
         return name;
     }
 
-    public List<int[]> getNumbersList() {
+    public List<Numbers> getNumbersList() {
         return numbersList;
     }
 
-    public void setNumbersList(List<int[]> numbersList) {
+    public void setNumbersList(List<Numbers> numbersList) {
         this.numbersList = numbersList;
     }
     
-    public void addNumbers(int[] numbers) {
+    public void addNumbers(Numbers numbers) {
         this.numbersList.add(numbers);
     }
     

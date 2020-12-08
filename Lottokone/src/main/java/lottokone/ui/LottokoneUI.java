@@ -157,7 +157,7 @@ public class LottokoneUI {
         }
         System.out.println("Numbers currently on your account:");
         service.getLoggedUser().getNumbersList().stream().forEach(numbers -> {
-            System.out.println(Arrays.toString(numbers));});
+            System.out.println(numbers);});
         printAvailableCommands();
     }
 }
