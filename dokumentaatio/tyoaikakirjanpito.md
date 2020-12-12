@@ -11,4 +11,5 @@
 | 2.12. | 1    | sekvenssikaavio ja release |
 | 7.12. | 1    | refaktorointia |
 | 8.12. | 8    | pelaamistoiminnallisuus testeineen, javadoc, arkkitehtuurikuvaus ja käyttöohje |
-| yht   | 21   | | 
+| 12.12. | 1    | javadoc plugin, checkstyle ja täydennystä |
+| yht   | 22   | | 
