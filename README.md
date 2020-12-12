@@ -42,3 +42,10 @@ Suoritettava tiedosto _target/Lottokone-1.0-SNAPSHOT.jar_ luodaan komennolla
 ```
 mvn package
 ```
+
+### JavaDoc
+
+JavaDoc-dokumentaatiotiedosto _target/site/apidocs/index.html_ luodaan komennolla
+```
+mvn javadoc:javadoc
+```
