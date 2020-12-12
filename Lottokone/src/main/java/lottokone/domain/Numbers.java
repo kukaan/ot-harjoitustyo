@@ -8,6 +8,10 @@ import java.util.Objects;
 public class Numbers {
     private List<Integer> numbers;
 
+    /**
+     * Create an object for a ticket / numbers on a ticket.
+     * @param numbers   the individual numbers in an array
+     */
     public Numbers(int[] numbers) {
         this.numbers = new ArrayList<>();
         for (int i = 0; i < numbers.length; i++) {
@@ -15,6 +19,10 @@ public class Numbers {
         }
     }
     
+    /**
+     * Create an object for a ticket / numbers on a ticket.
+     * @param numbers   the individual numbers in a List
+     */
     public Numbers(List<Integer> numbers) {
         this.numbers = numbers;
     }

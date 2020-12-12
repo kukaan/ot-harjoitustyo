@@ -9,10 +9,19 @@ public class User {
     private double winningsSum;
     private double lossesSum;
     
+    /**
+     * A user account.
+     * @param name  just a name
+     */
     public User(String name) {
         this(name, new ArrayList<>());
     }
     
+    /**
+     * A user account.
+     * @param name  just a name
+     * @param numbersList   a List for the numbers of this User to be saved in
+     */
     public User(String name, List<Numbers> numbersList) {
         this.name = name;
         this.numbersList = numbersList;
@@ -32,10 +41,18 @@ public class User {
         this.numbersList = numbersList;
     }
     
+    /**
+     * Save a set of numbers.
+     * @param numbers   a Numbers object
+     */
     public void addNumbers(Numbers numbers) {
         this.numbersList.add(numbers);
     }
     
+    /**
+     * Remove the saved numbers in the given index.
+     * @param i index
+     */
     public void removeNumbers(int i) {
         this.numbersList.remove(i);
     }
@@ -45,7 +62,7 @@ public class User {
     }
     
     /**
-     * Add amount of money won to the user
+     * Add amount of money won to the user.
      * @param winnings amount of money won
      */
     public void addWin(double winnings) {
@@ -57,7 +74,7 @@ public class User {
     }
     
     /**
-     * Add amount of money lost to user
+     * Add amount of money lost to user.
      * @param losses amount of money lost
      */
     public void addLoss(double losses) {

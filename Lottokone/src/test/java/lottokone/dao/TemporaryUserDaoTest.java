@@ -1,9 +1,6 @@
 package lottokone.dao;
 
 import java.util.ArrayList;
-import java.util.Random;
-import lottokone.dao.TemporaryUserDao;
-import lottokone.dao.UserDao;
 import lottokone.domain.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,19 +13,19 @@ public class TemporaryUserDaoTest {
     @Before
     public void setUp() {
         userDao = new TemporaryUserDao();
-        userDao.create(new User("asdf"));
-        userDao.create(new User("qwerty"));
+        userDao.createUser(new User("asdf"));
+        userDao.createUser(new User("qwerty"));
     }
     
     @Test
     public void createReturnsCreatedUser() {
-        User u = userDao.create(new User("cool"));
+        User u = userDao.createUser(new User("cool"));
         assertThat(u.getName(), is(equalTo("cool")));
     }
     
     @Test
     public void createReturnsNullIfUsernameExists() {
-        User u = userDao.create(new User("asdf"));
+        User u = userDao.createUser(new User("asdf"));
         assertThat(u, is(equalTo(null)));
     }
     

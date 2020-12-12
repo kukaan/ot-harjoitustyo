@@ -48,7 +48,7 @@ public class LottokoneServiceTest {
         ceilingService = new LottokoneService(ceiling, userDao);
         randomService = new LottokoneService(random, userDao);
         
-        userDao.create(new User("asdf"));
+        userDao.createUser(new User("asdf"));
     }
 
     @Test
@@ -91,12 +91,12 @@ public class LottokoneServiceTest {
     
     @Test
     public void createReturnsTrueIfDaoReturnsUser() {
-        assertTrue(randomService.create("baba"));
+        assertTrue(randomService.createUser("baba"));
     }
     
     @Test
     public void createReturnsFalseIfDaoReturnsNull() {
-        assertFalse(randomService.create("asdf"));
+        assertFalse(randomService.createUser("asdf"));
     }
     
     @Test

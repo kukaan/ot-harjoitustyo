@@ -19,6 +19,11 @@ public class LottokoneService {
     private int ticketPrice;
     private int[] prizes;
 
+    /**
+     * Start the service.
+     * @param random    an RNG
+     * @param userDao   DAO for User objects
+     */
     public LottokoneService(Random random, UserDao userDao) {
         this.random = random;
         this.userDao = userDao;
@@ -64,8 +69,8 @@ public class LottokoneService {
      * @param username  user input
      * @return operationSuccessful
      */
-    public boolean create(String username) {
-        User u = userDao.create(new User(username));
+    public boolean createUser(String username) {
+        User u = userDao.createUser(new User(username));
         return u != null;
     }
     
@@ -195,7 +200,7 @@ public class LottokoneService {
     /**
      * Select specific saved numbers/tickets by id input separated by commas 
      * or select all numbers/tickets by input 0.
-     * @param ticketIdsInput
+     * @param ticketIdsInput    user input
      * @return list of tickets
      */
     public List<Numbers> selectTickets(String ticketIdsInput) {
@@ -251,7 +256,7 @@ public class LottokoneService {
     /**
      * Calculates the total cost of given amount of tickets 
      * and adds them to the user.
-     * @param tickets
+     * @param tickets   amount of tickets
      * @return sum of costs
      */
     public int buyTickets(int tickets) {
@@ -276,7 +281,7 @@ public class LottokoneService {
 
     /**
      * Sums the given winnings and adds them to the user.
-     * @param winnings
+     * @param winnings  a List of money prizes won by each ticket
      * @return sum of winnings
      */
     public int addWinnings(List<Integer> winnings) {

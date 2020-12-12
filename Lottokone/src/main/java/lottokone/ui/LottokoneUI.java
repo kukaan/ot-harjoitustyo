@@ -90,7 +90,7 @@ public class LottokoneUI {
     private void register() {
         System.out.println("Enter a new username:");
         String username = reader.nextLine();
-        if (service.create(username)) {
+        if (service.createUser(username)) {
             System.out.println("Registration successful");
         } else {
             System.out.println("Registration failed");

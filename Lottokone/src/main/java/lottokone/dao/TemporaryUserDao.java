@@ -7,12 +7,15 @@ import lottokone.domain.User;
 public class TemporaryUserDao implements UserDao {
     private List<User> users;
 
+    /**
+     * Creates a temporary storage for User objects.
+     */
     public TemporaryUserDao() {
         this.users = new ArrayList<>();
     }
 
     @Override
-    public User create(User user) {
+    public User createUser(User user) {
         if (findByName(user.getName()) != null) {
             return null;
         }

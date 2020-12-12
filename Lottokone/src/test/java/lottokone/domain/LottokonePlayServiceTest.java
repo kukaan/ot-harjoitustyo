@@ -1,8 +1,6 @@
 package lottokone.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 import lottokone.dao.TemporaryUserDao;
 import lottokone.dao.UserDao;
@@ -51,7 +49,7 @@ public class LottokonePlayServiceTest {
         ceilingService = new LottokoneService(ceiling, userDao);
         service = new LottokoneService(random, userDao);
         
-        userDao.create(new User("asdf"));
+        userDao.createUser(new User("asdf"));
         service.login("asdf");
         service.add("1,2,3,4,5,6,7");
         service.add("17,16,15,14,13,12,11");
