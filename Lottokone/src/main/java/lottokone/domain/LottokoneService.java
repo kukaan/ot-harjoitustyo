@@ -70,8 +70,7 @@ public class LottokoneService {
      * @return operationSuccessful
      */
     public boolean createUser(String username) {
-        User u = userDao.createUser(new User(username));
-        return u != null;
+        return userDao.createUser(username);
     }
     
     /**
@@ -103,7 +102,7 @@ public class LottokoneService {
     public boolean add(String input) {
         List<Integer> numbersToAdd;
         try {
-            numbersToAdd = stringToListOfNumbers(input, rangeSize, drawSize, drawSize);
+            numbersToAdd = stringToListOfNumbers(input);
         } catch (Exception e) {
             return false;
         }
@@ -116,6 +115,17 @@ public class LottokoneService {
         }
         loggedUser.addNumbers(new Numbers(numbersToAdd));
         return true;
+    }
+    
+    /**
+     * Transforms user input into a list of numbers which are valid in amount (equals drawSize) 
+     * and range (equals rangeSize).
+     * @param input user input
+     * @return  a valid list of numbers
+     * @throws Exception 
+     */
+    public List<Integer> stringToListOfNumbers(String input) throws Exception {
+        return stringToListOfNumbers(input, rangeSize, drawSize, drawSize);
     }
     
     /**
@@ -210,7 +220,7 @@ public class LottokoneService {
         }
         List<Integer> ticketIds;
         try {
-            ticketIds = stringToListOfNumbers(ticketIdsInput, 
+            ticketIds = stringToListOfNumbers(ticketIdsInput,
                     numbersList.size(), 1, numbersList.size());
         } catch (Exception e) {
             return null;

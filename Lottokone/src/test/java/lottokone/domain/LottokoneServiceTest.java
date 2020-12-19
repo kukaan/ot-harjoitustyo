@@ -48,7 +48,7 @@ public class LottokoneServiceTest {
         ceilingService = new LottokoneService(ceiling, userDao);
         randomService = new LottokoneService(random, userDao);
         
-        userDao.createUser(new User("asdf"));
+        userDao.createUser("asdf");
     }
 
     @Test

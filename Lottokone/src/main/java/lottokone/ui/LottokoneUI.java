@@ -196,11 +196,11 @@ public class LottokoneUI {
         }
         
         int winSum = service.addWinnings(winnings);
-        System.out.println("You won " + (double) winSum / 100 + 
-                "€ and lost " + (double) costs / 100 + "€");
+        System.out.println("You won " + winSum / 100 + 
+                "€ and lost " + costs / 100 + "€");
         System.out.println("In total, you have won " + 
-                (double) service.getLoggedUser().getWinningsSum() / 100 + "€ and lost " + 
-                (double) service.getLoggedUser().getLossesSum() / 100 + "€");
+                service.getLoggedUser().getMoneyWon() / 100 + "€ and lost " + 
+                service.getLoggedUser().getMoneyLost() / 100 + "€");
     }
     
     private void printEnumeratedList(List list) {

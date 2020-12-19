@@ -4,29 +4,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+    private int id;
     private final String name;
     private List<Numbers> numbersList;
-    private double winningsSum;
-    private double lossesSum;
+    private int moneyWon;
+    private int moneyLost;
     
     /**
      * A user account.
+     * @param id    index in database
      * @param name  just a name
+     * @param moneyWon  amount of money won so far
+     * @param moneyLost amount of money lost so far
      */
-    public User(String name) {
-        this(name, new ArrayList<>());
+    public User(int id, String name, int moneyWon, int moneyLost) {
+        this(id, name, null, moneyWon, moneyLost);
     }
     
     /**
      * A user account.
+     * @param id    index in database
      * @param name  just a name
      * @param numbersList   a List for the numbers of this User to be saved in
+     * @param moneyWon  amount of money won so far
+     * @param moneyLost amount of money lost so far
      */
-    public User(String name, List<Numbers> numbersList) {
+    public User(int id, String name, List<Numbers> numbersList, int moneyWon, int moneyLost) {
+        this.id = id;
         this.name = name;
         this.numbersList = numbersList;
-        this.winningsSum = 0;
-        this.lossesSum = 0;
+        this.moneyWon = moneyWon;
+        this.moneyLost = moneyLost;
     }
 
     public String getName() {
@@ -57,20 +65,20 @@ public class User {
         this.numbersList.remove(i);
     }
 
-    public double getWinningsSum() {
-        return winningsSum;
+    public double getMoneyWon() {
+        return moneyWon;
     }
     
     /**
      * Add amount of money won to the user.
      * @param winnings amount of money won
      */
-    public void addWin(double winnings) {
-        this.winningsSum += winnings;
+    public void addWin(int winnings) {
+        this.moneyWon += winnings;
     }
 
-    public double getLossesSum() {
-        return lossesSum;
+    public double getMoneyLost() {
+        return moneyLost;
     }
     
     /**
@@ -78,6 +86,6 @@ public class User {
      * @param losses amount of money lost
      */
     public void addLoss(double losses) {
-        this.lossesSum += losses;
+        this.moneyLost += losses;
     }
 }

@@ -1,16 +1,17 @@
 package lottokone.dao;
 
 import java.util.List;
+import lottokone.domain.Numbers;
 import lottokone.domain.User;
 
 public interface UserDao {
     
     /**
      * Save a new User.
-     * @param user  a User
-     * @return  the User saved in the database or null if User already saved
+     * @param name  username
+     * @return  operation completed successfully
      */
-    User createUser(User user);
+    boolean createUser(String name);
     
     /**
      * Find a User by its name.
@@ -24,4 +25,11 @@ public interface UserDao {
      * @return a List of all saved Users
      */
     List<User> findAll();
+    
+    boolean addNumbers(int id, Numbers numbers);
+    
+    public void addWin(int id, int moneySum);
+    
+    public void addLoss(int id, int moneySum);
+    
 }

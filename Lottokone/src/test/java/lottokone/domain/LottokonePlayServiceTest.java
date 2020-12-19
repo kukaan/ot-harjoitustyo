@@ -49,7 +49,7 @@ public class LottokonePlayServiceTest {
         ceilingService = new LottokoneService(ceiling, userDao);
         service = new LottokoneService(random, userDao);
         
-        userDao.createUser(new User("asdf"));
+        userDao.createUser("asdf");
         service.login("asdf");
         service.add("1,2,3,4,5,6,7");
         service.add("17,16,15,14,13,12,11");

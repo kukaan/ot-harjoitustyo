@@ -2,6 +2,7 @@ package lottokone.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import lottokone.domain.Numbers;
 import lottokone.domain.User;
 
 public class TemporaryUserDao implements UserDao {
@@ -15,12 +16,12 @@ public class TemporaryUserDao implements UserDao {
     }
 
     @Override
-    public User createUser(User user) {
-        if (findByName(user.getName()) != null) {
-            return null;
+    public boolean createUser(String name) {
+        if (findByName(name) != null) {
+            return false;
         }
-        users.add(user);
-        return findByName(user.getName());
+        users.add(new User(users.size(), name, new ArrayList<>(), 0, 0));
+        return true;
     }
 
     @Override
@@ -36,6 +37,21 @@ public class TemporaryUserDao implements UserDao {
     @Override
     public List<User> findAll() {
         return users;
+    }
+
+    @Override
+    public boolean addNumbers(int id, Numbers numbers) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addWin(int id, int moneySum) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addLoss(int id, int moneySum) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
