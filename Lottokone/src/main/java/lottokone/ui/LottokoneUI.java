@@ -26,7 +26,7 @@ public class LottokoneUI {
         
         
         availableCommands.put("quit", "exit the program");
-        availableCommands.put("help", "show available availableCommands");
+        availableCommands.put("help", "show available commands");
         availableCommands.put("draw", "draw the lucky numbers");
         
         loggedOutCommands.put("register", "create a new account");
@@ -38,7 +38,6 @@ public class LottokoneUI {
         loggedInCommands.put("add", "pick and save numbers to your account");
         loggedInCommands.put("play", "play a round of lotto");
         loggedInCommands.put("autoplay", "play multiple rounds of lotto");
-        loggedInCommands.put("stats", "show your statistics");
     }
     
     public void start() {
