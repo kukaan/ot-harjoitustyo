@@ -90,6 +90,10 @@ public class LottokoneService {
         loggedUser = null;
     }
     
+    /**
+     * Get up-to-date information of the logged in User.
+     * @return  User in database
+     */
     public User getLoggedUser() {
         if (loggedUser == null) {
             return null;
@@ -309,6 +313,13 @@ public class LottokoneService {
         return winSum;
     }
     
+    /**
+     * Turn a String input into an int within a specified range.
+     * @param input user input
+     * @param minValue  minimum value
+     * @param maxValue  maximum value
+     * @return int within the specified range or -1 if invalid
+     */
     public int validateIntegerInput(String input, int minValue, int maxValue) {
         int num = -1;
         try {

@@ -20,10 +20,26 @@ public interface UserDao {
      */
     User findByName(String name);
     
+    /**
+     * Add numbers to a User.
+     * @param id    user id
+     * @param numbers   playable numbers
+     * @return  operation completed successfully
+     */
     boolean addNumbers(int id, Numbers numbers);
     
+    /**
+     * Add a sum of money to the wins of User.
+     * @param id    user id
+     * @param moneySum  amount of money won
+     */
     public void addWin(int id, int moneySum);
     
+    /**
+     * Add a sum of money to the losses of User.
+     * @param id    user id
+     * @param moneySum  amount of money lost
+     */
     public void addLoss(int id, int moneySum);
     
 }

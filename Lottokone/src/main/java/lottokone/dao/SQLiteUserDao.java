@@ -13,6 +13,10 @@ public class SQLiteUserDao implements UserDao {
     private Connection connection;
     private LottokoneService service;
 
+    /**
+     * Connects to the database and creates tables if necessary.
+     * @param fileName the name of the database file
+     */
     public SQLiteUserDao(String fileName) {
         try {
             this.connection = DriverManager.getConnection("jdbc:sqlite:" + fileName);
@@ -52,7 +56,7 @@ public class SQLiteUserDao implements UserDao {
             PreparedStatement statement = this.connection.prepareStatement("INSERT INTO Numbers (userId, numbers) VALUES (?,?);");
             statement.setInt(1, userId);
             String s = numbers.toString();
-            statement.setString(2, s.substring(1, s.length()-1));
+            statement.setString(2, s.substring(1, s.length() - 1));
             statement.executeUpdate();
         } catch (SQLException e) {
             printGeneralErrorMessage();
