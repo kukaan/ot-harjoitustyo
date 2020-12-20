@@ -21,4 +21,8 @@ Sovelluslogiikka järjestetään LottokoneService-luokassa, joka tarjoaa toimint
 
 #### Lottorivin lisääminen
 
+Päävalikossa oleva kirjautunut käyttäjä lisää yhden lottorivin näin:
+
 ![sekvenssikaavio](sekvenssikaavio.png)
+
+Käyttöliittymä ilmoittaa sovelluslogiikkakerrokseen merkkijonosyötteen. Merkkijonosyöte validoidaan pelin sääntöjen mukaisiksi luvuiksi, ja annetaan eteenpäin DAO:lle lottorivioliona. Tämän jälkeen tilanne tietokannassa on muuttunut, joten DAO:sta haetaan päivittynyt käyttäjäolio. Käyttöliittymä saa tiedon onnistuneesta operaatiosta ja kysyy seuraavan lisättävän rivin lukuja käyttäjältä, joka kieltäytyy tyhjällä syötteellä.
