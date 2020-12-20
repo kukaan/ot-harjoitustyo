@@ -8,19 +8,18 @@
 
 - Sovelluksella on vain yksi käyttäjärooli.
 
-## Suunnitellut toiminnallisuudet
+## Toiminnallisuudet
 
 Käyttäjä voi komentoriviltä
-- arpoa yksittäisen lottorivin [tehty]
-- luoda käyttäjätunnuksen ja kirjautua sillä [tehty]
-- valita pelin asetukset: arvottavan rivin pituus ja valittavissa olevien lukujen määrä
-- syöttää ja tallentaa lottorivejä [tehty]
-- pelata valitsemillaan lottoriveillä [tehty]
-- nähdä pelin tuloksen [tehty]
-- katsoa koosteen omista pelituloksistaan, käyttämästään rahasummasta ja voittamastaan rahasummasta
+- arpoa yksittäisen lottorivin
+- luoda käyttäjätunnuksen ja kirjautua sillä
+- syöttää ja tallentaa lottorivejä
+- pelata valitsemillaan lottoriveillä yhden tai useampia pelikierroksia ja nähdä pelien tulokset
 
 ## Jatkokehitysideoita
 
+- Pelitilastojen katsominen
+- Pelin sääntöjen muuttaminen: numerot ja voittoluokat
 - Useiden pelikierrosten laajamittaisen pelaamisen simulointi: 
   - useiden pelaajien simulointi - jokaisella omat (mielellään ihmismäisellä painotuksella) satunnaisgeneroidut lottorivinsä
   - kierroksen täysosumien määrän laskenta
