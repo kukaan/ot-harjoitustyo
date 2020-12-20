@@ -16,6 +16,8 @@ Sovelluksella voidaan pelata lottopeliä.
 
 ## Julkaisut
 
+[Viikko 7](https://github.com/kukaan/ot-harjoitustyo/releases/tag/viikko7)
+
 [Viikko 6](https://github.com/kukaan/ot-harjoitustyo/releases/tag/viikko6)
 
 [Viikko 5](https://github.com/kukaan/ot-harjoitustyo/releases/tag/viikko5)
