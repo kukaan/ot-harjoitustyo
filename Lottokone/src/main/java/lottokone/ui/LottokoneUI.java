@@ -154,7 +154,10 @@ public class LottokoneUI {
     
     private void play() {
         List<Numbers> selectedTickets = selectTickets();
-        
+        if (selectedTickets == null) {
+            System.out.println("Invalid input!");
+            return;
+        }
         int costs = service.buyTickets(selectedTickets.size());
         Numbers drawn = new Numbers(service.draw());
         
@@ -208,6 +211,10 @@ public class LottokoneUI {
         }
         
         List<Numbers> selectedTickets = selectTickets();
+        if (selectedTickets == null) {
+            System.out.println("Invalid input!");
+            return;
+        }
         
         int costs = service.buyTickets(selectedTickets.size() * rounds);
         int winSum = 0;
