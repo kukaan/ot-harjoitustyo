@@ -18,7 +18,7 @@ public class User {
      * @param moneyLost amount of money lost so far
      */
     public User(int id, String name, int moneyWon, int moneyLost) {
-        this(id, name, null, moneyWon, moneyLost);
+        this(id, name, new ArrayList<>(), moneyWon, moneyLost);
     }
     
     /**
@@ -35,6 +35,10 @@ public class User {
         this.numbersList = numbersList;
         this.moneyWon = moneyWon;
         this.moneyLost = moneyLost;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

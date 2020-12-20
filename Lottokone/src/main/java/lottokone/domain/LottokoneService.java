@@ -91,11 +91,14 @@ public class LottokoneService {
     }
     
     public User getLoggedUser() {
-        return loggedUser;
+        if (loggedUser == null) {
+            return null;
+        }
+        return userDao.findByName(loggedUser.getName());
     }
 
     /**
-     * Adds and saves numbers/ticket to user through multiple steps of validation.
+     * Validates and saves numbers/ticket to users.
      * @param input user input
      * @return operationSuccessful
      */
@@ -113,7 +116,10 @@ public class LottokoneService {
         if (accountHasSameNumbers(numbersToAdd)) { 
             return false;
         }
-        loggedUser.addNumbers(new Numbers(numbersToAdd));
+        Numbers numbersObject = new Numbers(numbersToAdd);
+        userDao.addNumbers(loggedUser.getId(), numbersObject);
+//        loggedUser.addNumbers(numbersObject);
+        loggedUser = getLoggedUser();
         return true;
     }
     
@@ -145,6 +151,7 @@ public class LottokoneService {
             throw new Exception();
         }
         for (int i = 0; i < s.length; i++) {
+//            s[i] = s[i].trim();
             int number = -1;
             try {
                 number = Integer.valueOf(s[i]);
@@ -271,7 +278,8 @@ public class LottokoneService {
      */
     public int buyTickets(int tickets) {
         int costs = tickets * ticketPrice;
-        loggedUser.addLoss(costs);
+        userDao.addLoss(loggedUser.getId(), costs);
+        loggedUser = getLoggedUser();
         return costs;
     }
 
@@ -296,7 +304,8 @@ public class LottokoneService {
      */
     public int addWinnings(List<Integer> winnings) {
         int winSum = winnings.stream().mapToInt(win -> win).sum();
-        loggedUser.addWin(winSum);
+        userDao.addWin(loggedUser.getId(), winSum);
+        loggedUser = getLoggedUser();
         return winSum;
     }
 }

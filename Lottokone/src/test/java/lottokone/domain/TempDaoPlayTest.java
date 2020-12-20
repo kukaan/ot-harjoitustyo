@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-public class LottokonePlayServiceTest {
+public class TempDaoPlayTest {
     Random random;
     Random floor;
     Random ceiling;
@@ -36,7 +36,7 @@ public class LottokonePlayServiceTest {
         }
     }
     
-    public LottokonePlayServiceTest() {
+    public TempDaoPlayTest() {
     }
     
     @Before

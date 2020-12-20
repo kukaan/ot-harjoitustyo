@@ -2,6 +2,7 @@ package lottokone.dao;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import lottokone.domain.LottokoneService;
 import lottokone.domain.Numbers;
@@ -21,7 +22,7 @@ public class SQLiteUserDao implements UserDao {
                     "CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT"
                     + ", name TEXT UNIQUE, moneyWon INTEGER DEFAULT 0, moneyLost INTEGER DEFAULT 0);");
             statement.executeUpdate(
-                    "CREATE TABLE IF NOT EXISTS Tickets (id INTEGER PRIMARY KEY AUTOINCREMENT"
+                    "CREATE TABLE IF NOT EXISTS Numbers (id INTEGER PRIMARY KEY AUTOINCREMENT"
                     + ", userId INTEGER, numbers STRING);");
         } catch (SQLException e) {
             printGeneralErrorMessage();
@@ -38,7 +39,6 @@ public class SQLiteUserDao implements UserDao {
             PreparedStatement statement = this.connection.prepareStatement("INSERT INTO Users (name) VALUES (?);");
             statement.setString(1, name);
             statement.executeUpdate();
-            statement.close();
         } catch (SQLException e) {
             printGeneralErrorMessage();
             return false;
@@ -54,7 +54,6 @@ public class SQLiteUserDao implements UserDao {
             String s = numbers.toString();
             statement.setString(2, s.substring(1, s.length()-1));
             statement.executeUpdate();
-            statement.close();
         } catch (SQLException e) {
             printGeneralErrorMessage();
             return false;
@@ -66,11 +65,10 @@ public class SQLiteUserDao implements UserDao {
     public User findByName(String name) {
         try {
             PreparedStatement statement = this.connection.prepareStatement("SELECT * FROM Users WHERE name=?");
+            statement.setString(1, name);
             ResultSet result = statement.executeQuery();
-            statement.close();
-            List<String> usersNumbers = new ArrayList<>();
             if (result.next()) {
-                return new User(result.getInt("id"), result.getString(name),
+                return new User(result.getInt("id"), result.getString("name"),
                         findNumbersByUserId(result.getInt("id")),
                         result.getInt("moneyWon"), result.getInt("moneyLost"));
             }
@@ -83,12 +81,12 @@ public class SQLiteUserDao implements UserDao {
     private List<Numbers> findNumbersByUserId(int userId) {
         try {
             PreparedStatement statement = this.connection.prepareStatement("SELECT numbers FROM Numbers WHERE userId=?");
+            statement.setInt(1, userId);
             ResultSet result = statement.executeQuery();
             List<String> strings = new ArrayList<>();
             while (result.next()) {
                 strings.add(result.getString("numbers"));
             }
-            statement.close();
             List<Numbers> numbersList = new ArrayList<>();
             for (String s : strings) {
                 numbersList.add(new Numbers(service.stringToListOfNumbers(s)));
@@ -96,6 +94,7 @@ public class SQLiteUserDao implements UserDao {
             return numbersList;
 
         } catch (Exception e) {
+//            System.out.println(Arrays.toString(e.getStackTrace()));
             printGeneralErrorMessage();
         }
         return null;
@@ -114,7 +113,6 @@ public class SQLiteUserDao implements UserDao {
             statement.setInt(1, win);
             statement.setInt(2, id);
             statement.executeUpdate();
-            statement.close();
         } catch (SQLException e) {
             printGeneralErrorMessage();
         }
@@ -127,7 +125,6 @@ public class SQLiteUserDao implements UserDao {
             statement.setInt(1, loss);
             statement.setInt(2, id);
             statement.executeUpdate();
-            statement.close();
         } catch (SQLException e) {
             printGeneralErrorMessage();
         }

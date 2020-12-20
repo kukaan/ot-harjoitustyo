@@ -33,6 +33,13 @@ public class TemporaryUserDao implements UserDao {
         }
         return null;
     }
+    
+    private User findById(int id) {
+        if (users.size() < id) {
+            return null;
+        }
+        return users.get(id);
+    }
 
     @Override
     public List<User> findAll() {
@@ -41,17 +48,30 @@ public class TemporaryUserDao implements UserDao {
 
     @Override
     public boolean addNumbers(int id, Numbers numbers) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        User u = findById(id);
+        if (u == null) {
+            return false;
+        }
+        u.addNumbers(numbers);
+        return true;
     }
 
     @Override
     public void addWin(int id, int moneySum) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        User u = findById(id);
+        if (u == null) {
+            return;
+        }
+        u.addWin(moneySum);
     }
 
     @Override
     public void addLoss(int id, int moneySum) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        User u = findById(id);
+        if (u == null) {
+            return;
+        }
+        u.addLoss(moneySum);
     }
     
 }

@@ -33,7 +33,13 @@ public class Numbers {
 
     @Override
     public String toString() {
-        return numbers.toString();
+        String s = "[";
+        for (int i = 0; i < numbers.size() - 1; i++) {
+            s += numbers.get(i) + ",";
+        }
+        s += numbers.get(numbers.size() - 1) + "]";
+        return s;
+//        return numbers.toString();
     }
 
     @Override
