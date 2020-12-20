@@ -40,6 +40,7 @@ public class LottokoneUI {
         loggedInCommands.put("add", "pick and save numbers to your account");
         loggedInCommands.put("play", "play a round of lotto");
         loggedInCommands.put("autoplay", "play multiple rounds of lotto");
+        loggedInCommands.put("stats", "show your statistics");
     }
     
     public void start() {
@@ -189,11 +190,8 @@ public class LottokoneUI {
                     (double) winnings.get(i) / 100 + "€");
         }
         
-        System.out.println("You won " + winSum / 100 + 
-                "€ and lost " + costs / 100 + "€");
-        System.out.println("In total, you have won " + 
-                (double) service.getLoggedUser().getMoneyWon() / 100 + "€ and lost " + 
-                (double) service.getLoggedUser().getMoneyLost() / 100 + "€");
+        System.out.print("You won ");
+        printResults(winSum, costs);
     }
     
     private void printEnumeratedList(List list) {
@@ -239,11 +237,15 @@ public class LottokoneUI {
             winSum += service.addWinnings(winnings);
         }
         
-        System.out.println("In " + rounds + " rounds, you won " + winSum / 100 + 
-                "€ and lost " + costs / 100 + "€");
+        System.out.print("In " + rounds + " rounds, you won ");
+        printResults(winSum, costs);
+    }
+
+    private void printResults(int winSum, int costs) {
+        System.out.println((double) winSum / 100 + 
+                "€ and lost " + (double) costs / 100 + "€");
         System.out.println("In total, you have won " + 
                 (double) service.getLoggedUser().getMoneyWon() / 100 + "€ and lost " + 
                 (double) service.getLoggedUser().getMoneyLost() / 100 + "€");
     }
-    
 }
