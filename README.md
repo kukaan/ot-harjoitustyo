@@ -6,9 +6,11 @@ Sovelluksella voidaan pelata lottopeliä.
 
 [Käyttöohje](dokumentaatio/kayttoohje.md)
 
+[Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
+
 [Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
 
-[Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
+[Testausdokumentti](dokumentaatio/testaus.md)
 
 [Työaikakirjanpito](dokumentaatio/tyoaikakirjanpito.md)
 
