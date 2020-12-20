@@ -13,5 +13,5 @@
 | 8.12. | 8    | pelaamistoiminnallisuus testeineen, javadoc, arkkitehtuurikuvaus ja käyttöohje |
 | 12.12. | 1    | javadoc plugin, checkstyle ja täydennystä |
 | 19.12. | 4    | refaktorointia tietokantaa varten |
-| 20.12. | 6    | tietokannan implementoinnissa epäonnistuminen, feature, testejä, siistimistä, dokumentaatiota |
-| yht   | 32   | | 
+| 20.12. | 7    | tietokannan implementoinnissa epäonnistuminen, feature, testejä, siistimistä, dokumentaatiota |
+| yht   | 33   | | 
