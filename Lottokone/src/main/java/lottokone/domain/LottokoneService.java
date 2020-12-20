@@ -308,4 +308,17 @@ public class LottokoneService {
         loggedUser = getLoggedUser();
         return winSum;
     }
+    
+    public int validateIntegerInput(String input, int minValue, int maxValue) {
+        int num = -1;
+        try {
+            num = Integer.valueOf(input);
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+        if (num < minValue || num > maxValue) {
+            return -1;
+        }
+        return num;
+    }
 }

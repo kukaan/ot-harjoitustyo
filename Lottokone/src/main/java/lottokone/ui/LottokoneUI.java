@@ -39,6 +39,7 @@ public class LottokoneUI {
         loggedInCommands.put("logout", "log out from your account");
         loggedInCommands.put("add", "pick and save numbers to your account");
         loggedInCommands.put("play", "play a round of lotto");
+        loggedInCommands.put("autoplay", "play multiple rounds of lotto");
     }
     
     public void start() {
@@ -70,6 +71,8 @@ public class LottokoneUI {
                 add();
             } else if (input.equals("play")) {
                 play();
+            } else if (input.equals("autoplay")) {
+                autoplay();
             } 
             
         }
@@ -167,17 +170,7 @@ public class LottokoneUI {
     }
     
     private void play() {
-        System.out.println("[0]\t[all of the below]");
-        printEnumeratedList(service.getLoggedUser().getNumbersList());
-        System.out.println("Choose the saved numbers you want to play "
-                + "separated by commas (,):");
-        String ticketsInput = reader.nextLine();
-        
-        List<Numbers> selectedTickets = service.selectTickets(ticketsInput);
-        if (selectedTickets == null) {
-            System.out.println("Invalid input!");
-            return;
-        }
+        List<Numbers> selectedTickets = selectTickets();
         
         int costs = service.buyTickets(selectedTickets.size());
         Numbers drawn = new Numbers(service.draw());
@@ -188,6 +181,7 @@ public class LottokoneUI {
         
         List<Integer> hitsOnTickets = service.countHitsOnTickets(drawn, selectedTickets);
         List<Integer> winnings = service.calculateWinnings(hitsOnTickets);
+        int winSum = service.addWinnings(winnings);
         
         for (int i = 0; i < selectedTickets.size(); i++) {
             System.out.println(selectedTickets.get(i) + ": " + 
@@ -195,12 +189,11 @@ public class LottokoneUI {
                     (double) winnings.get(i) / 100 + "€");
         }
         
-        int winSum = service.addWinnings(winnings);
         System.out.println("You won " + winSum / 100 + 
                 "€ and lost " + costs / 100 + "€");
         System.out.println("In total, you have won " + 
-                service.getLoggedUser().getMoneyWon() / 100 + "€ and lost " + 
-                service.getLoggedUser().getMoneyLost() / 100 + "€");
+                (double) service.getLoggedUser().getMoneyWon() / 100 + "€ and lost " + 
+                (double) service.getLoggedUser().getMoneyLost() / 100 + "€");
     }
     
     private void printEnumeratedList(List list) {
@@ -208,6 +201,49 @@ public class LottokoneUI {
         for (Object o : list) {
             System.out.println("[" + i++ + "]\t" + o);
         }
+    }
+    
+    private List<Numbers> selectTickets() {
+        System.out.println("[0]\t[all of the below]");
+        printEnumeratedList(service.getLoggedUser().getNumbersList());
+        System.out.println("Choose the saved numbers you want to play "
+                + "separated by commas (,):");
+        String ticketsInput = reader.nextLine();
+        
+        List<Numbers> selectedTickets = service.selectTickets(ticketsInput);
+        if (selectedTickets == null) {
+            System.out.println("Invalid input!");
+            return null;
+        }
+        
+        return selectedTickets;
+    }
+    
+    public void autoplay() {
+        System.out.println("How many rounds? (max 1000000)");
+        String roundsInput = reader.nextLine();
+        int rounds = service.validateIntegerInput(roundsInput, 1, 1000000);
+        if (rounds == -1) {
+            System.out.println("Invalid input!");
+            return;
+        }
+        
+        List<Numbers> selectedTickets = selectTickets();
+        
+        int costs = service.buyTickets(selectedTickets.size() * rounds);
+        int winSum = 0;
+        for (int i = 0; i < rounds; i++) {
+            Numbers drawn = new Numbers(service.draw());
+            List<Integer> hitsOnTickets = service.countHitsOnTickets(drawn, selectedTickets);
+            List<Integer> winnings = service.calculateWinnings(hitsOnTickets);
+            winSum += service.addWinnings(winnings);
+        }
+        
+        System.out.println("In " + rounds + " rounds, you won " + winSum / 100 + 
+                "€ and lost " + costs / 100 + "€");
+        System.out.println("In total, you have won " + 
+                (double) service.getLoggedUser().getMoneyWon() / 100 + "€ and lost " + 
+                (double) service.getLoggedUser().getMoneyLost() / 100 + "€");
     }
     
 }
