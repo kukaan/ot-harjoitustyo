@@ -20,12 +20,6 @@ public interface UserDao {
      */
     User findByName(String name);
     
-    /**
-     * Get all Users.
-     * @return a List of all saved Users
-     */
-    List<User> findAll();
-    
     boolean addNumbers(int id, Numbers numbers);
     
     public void addWin(int id, int moneySum);

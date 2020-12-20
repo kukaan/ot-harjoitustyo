@@ -100,12 +100,6 @@ public class SQLiteUserDao implements UserDao {
         return null;
     }
 
-    // todo: remove from dao interface
-    @Override
-    public List<User> findAll() {
-        throw new UnsupportedOperationException("Will not be implemented.");
-    }
-
     @Override
     public void addWin(int id, int win) {
         try {

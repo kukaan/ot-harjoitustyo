@@ -42,11 +42,6 @@ public class TemporaryUserDao implements UserDao {
     }
 
     @Override
-    public List<User> findAll() {
-        return users;
-    }
-
-    @Override
     public boolean addNumbers(int id, Numbers numbers) {
         User u = findById(id);
         if (u == null) {

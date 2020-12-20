@@ -37,15 +37,4 @@ public class TemporaryUserDaoTest {
     public void findByNameReturnsNullIfUserNotFound() {
         assertThat(userDao.findByName("aaaa"), is(equalTo(null)));
     }
-    
-    @Test
-    public void findAllReturnsAll() {
-        ArrayList<String> expected = new ArrayList<>();
-        expected.add("asdf");
-        expected.add("qwerty");
-        int i = 0;
-        for (User u : userDao.findAll()) {
-            assertThat(u.getName(), is(equalTo(expected.get(i++))));
-        }
-    }
 }
