@@ -1,6 +1,7 @@
 package lottokone.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import lottokone.dao.TemporaryUserDao;
 import lottokone.dao.UserDao;
@@ -70,5 +71,20 @@ public class TempDaoPlayTest {
 //        String[] s = "1".split(",");
 //        System.out.println(Integer.valueOf(s[0]));
         assertThat(service.selectTickets("1"), is(equalTo(expected)));
+    }
+    
+    @Test
+    public void playingCostsAreCorrect() {
+        service.buyTickets(3);
+        assertTrue(service.getLoggedUser().getMoneyLost() == 3 * service.getTicketPrice());
+    }
+    
+    @Test
+    public void winsAreAddedCorrectly() {
+        List<Integer> winnings = new ArrayList<>();
+        winnings.add(1);
+        winnings.add(10000000);
+        service.addWinnings(winnings);
+        assertTrue(service.getLoggedUser().getMoneyWon() == winnings.get(0) + winnings.get(1));
     }
 }
