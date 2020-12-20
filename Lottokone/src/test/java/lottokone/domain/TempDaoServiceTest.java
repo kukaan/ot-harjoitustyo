@@ -139,8 +139,6 @@ public class TempDaoServiceTest {
         randomService.add("40,1,2,3,4,5,6");
         int[] expected1 = {1,2,3,4,5,6,40};
         List<Numbers> numbersList = randomService.getLoggedUser().getNumbersList();
-//        System.out.println(Arrays.toString(expected0));
-//        System.out.println(numbersList.get(0));
         assertThat(numbersList.get(0), is(equalTo(expected0)));
         assertThat(numbersList.get(1), is(equalTo(expected1)));
     }

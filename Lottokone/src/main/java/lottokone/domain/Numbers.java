@@ -39,7 +39,6 @@ public class Numbers {
         }
         s += numbers.get(numbers.size() - 1) + "]";
         return s;
-//        return numbers.toString();
     }
 
     @Override

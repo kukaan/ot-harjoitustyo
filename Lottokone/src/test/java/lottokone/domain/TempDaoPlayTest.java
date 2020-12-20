@@ -67,9 +67,6 @@ public class TempDaoPlayTest {
     
     @Test
     public void oneTicketInputSelectsCorrectly() {
-//        System.out.println(service.selectTickets("1"));
-//        String[] s = "1".split(",");
-//        System.out.println(Integer.valueOf(s[0]));
         assertThat(service.selectTickets("1"), is(equalTo(expected)));
     }
     

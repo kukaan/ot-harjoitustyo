@@ -132,39 +132,6 @@ public class SQLiteDaoServiceTest {
         assertThat(randomService.getLoggedUser(), is(equalTo(null)));
     }
     
-    /*
-    @Test
-    public void validNumbersInputCanBeAdded() {
-        randomService.login("asdf");
-        randomService.add("40,1,2,3,4,5,6");
-        int[] expected = {1,2,3,4,5,6,40};
-        List<Numbers> numbersList = randomService.getLoggedUser().getNumbersList();
-        assertThat(numbersList.get(0), is(equalTo(expected)));
-    }
-    
-    @Test
-    public void twoDifferentValidNumbersInputsCanBeAdded() {
-        randomService.login("asdf");
-        randomService.add("39,1,2,3,4,5,6");
-        int[] expected0 = {1,2,3,4,5,6,39};
-        randomService.add("40,1,2,3,4,5,6");
-        int[] expected1 = {1,2,3,4,5,6,40};
-        List<Numbers> numbersList = randomService.getLoggedUser().getNumbersList();
-//        System.out.println(Arrays.toString(expected0));
-//        System.out.println(numbersList.get(0));
-        assertThat(numbersList.get(0), is(equalTo(expected0)));
-        assertThat(numbersList.get(1), is(equalTo(expected1)));
-    }
-    
-    
-    @Test
-    public void numbersAlreadyOnAccountCannotBeAdded() {
-        randomService.login("asdf");
-        randomService.add("40,1,2,3,4,5,6");
-        assertFalse(randomService.add("6,40,1,2,3,4,5"));
-    }
-    */
-    
     @Test
     public void numbersOutOfRangeCannotBeAdded() {
         randomService.login("asdf");

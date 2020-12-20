@@ -55,7 +55,6 @@ public class LottokoneService {
             int oneDrawn = random.nextInt(rangeSize);
             while (removed[oneDrawn]) {
                 oneDrawn = random.nextInt(rangeSize);
-//                System.out.println(oneDrawn);
             }
             removed[oneDrawn] = true;
             allDrawn[i] = oneDrawn + 1;
@@ -122,7 +121,6 @@ public class LottokoneService {
         }
         Numbers numbersObject = new Numbers(numbersToAdd);
         userDao.addNumbers(loggedUser.getId(), numbersObject);
-//        loggedUser.addNumbers(numbersObject);
         loggedUser = getLoggedUser();
         return true;
     }
@@ -155,7 +153,6 @@ public class LottokoneService {
             throw new Exception();
         }
         for (int i = 0; i < s.length; i++) {
-//            s[i] = s[i].trim();
             int number = -1;
             try {
                 number = Integer.valueOf(s[i]);
@@ -197,12 +194,10 @@ public class LottokoneService {
     private boolean accountHasSameNumbers(List<Integer> numbers) {
         for (Numbers accountNumbers : loggedUser.getNumbersList()) {
             for (int i = 0; i < drawSize; i++) {
-//                System.out.println("acc: "+accountNumbers[i]+", new:"+numbers[i]);
                 if (!accountNumbers.getNumbers().get(i).equals(numbers.get(i))) {
                     break;
                 }
                 if (i == drawSize - 1) {
-//                    System.out.println("accountHasNumbers");
                     return true;
                 }
             }

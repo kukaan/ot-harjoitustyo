@@ -98,7 +98,6 @@ public class SQLiteUserDao implements UserDao {
             return numbersList;
 
         } catch (Exception e) {
-//            System.out.println(Arrays.toString(e.getStackTrace()));
             printGeneralErrorMessage();
         }
         return null;

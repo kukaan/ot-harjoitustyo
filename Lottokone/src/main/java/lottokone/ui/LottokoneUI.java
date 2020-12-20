@@ -13,7 +13,6 @@ public class LottokoneUI {
     private Scanner reader;
     private LottokoneService service;
     private Map<String, String> availableCommands;
-//    private Map<String, String> unavailableCommands;
     private Map<String, String> loggedInCommands;
     private Map<String, String> loggedOutCommands;
 
@@ -22,7 +21,6 @@ public class LottokoneUI {
         this.service = service;
         
         availableCommands = new TreeMap<>();
-//        unavailableCommands = new TreeMap<>();
         loggedInCommands = new TreeMap<>();
         loggedOutCommands = new TreeMap<>();
         
@@ -106,10 +104,6 @@ public class LottokoneUI {
         String username = reader.nextLine();
         if (service.login(username)) {
             System.out.println("Login successful");
-//            makeCommandUnavailable("register");
-//            makeCommandUnavailable("login");
-//            makeCommandAvailable("logout");
-//            makeCommandAvailable("add");
             makeCommandsAvailable(loggedInCommands);
             makeCommandsUnavailable(loggedOutCommands);
             printAvailableCommands();
@@ -128,19 +122,8 @@ public class LottokoneUI {
         availableCommands.putAll(commands);
     }
     
-//    private void makeCommandUnavailable(String cmd) {
-//        unavailableCommands.put(cmd, availableCommands.remove(cmd));
-//    }
-//    
-//    private void makeCommandAvailable(String cmd) {
-//        availableCommands.put(cmd, unavailableCommands.remove(cmd));
-//    }
-    
     private void logout() {
         service.logout();
-//        makeCommandAvailable("register");
-//        makeCommandAvailable("login");
-//        makeCommandUnavailable("logout");
         makeCommandsAvailable(loggedOutCommands);
         makeCommandsUnavailable(loggedInCommands);
         System.out.println("Logged out");
@@ -176,8 +159,7 @@ public class LottokoneUI {
         int costs = service.buyTickets(selectedTickets.size());
         Numbers drawn = new Numbers(service.draw());
         
-        System.out.println("The results have come in.");
-        // todo: add dramatic effect by printing numbers one at a time with delay
+        System.out.println("The results are in.");
         System.out.println("The winning numbers are " + drawn);
         
         List<Integer> hitsOnTickets = service.countHitsOnTickets(drawn, selectedTickets);
